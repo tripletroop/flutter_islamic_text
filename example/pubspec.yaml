@@ -18,7 +18,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  fonts:
-    - family: IslamicPhrases
-      fonts:
-        - asset: ../fonts/islamic_phrases.ttf

@@ -3,25 +3,6 @@
 A Flutter widget to render Islamic phrases with compact ligatures and custom font.  
 This package replaces common phrases like "صلى الله عليه وسلم" with symbols such as "ﷺ" and paints them in a dedicated font. It is designed to be **safe, performant, and extensible** for future glyph rendering.
 
----
-
-## Font Setup (Required)
-
-This package uses a custom font called **IslamicPhrases**.  
-
-Add the following to your **host app** `pubspec.yaml`:
-
-```yaml
-flutter:
-  fonts:
-    - family: IslamicPhrases
-      fonts:
-        - asset: packages/islamic_text/fonts/islamic_phrases.ttf
-```
-
-> ⚠️ Without this, the `IslamicText` widget will fallback to normal text or throw an error if fallback is disabled.
-
----
 
 ## Features
 
@@ -107,49 +88,6 @@ IslamicText(
 ```
 
 > The `islamicVerticalOffset` helps align the ligatures correctly with surrounding text.
-
----
-
-## Advanced Usage
-
-- Encode/decode text programmatically:
-
-```dart
-import 'package:islamic_text/src/ligature_replacer.dart';
-
-final replacer = LigatureReplacer();
-final encoded = replacer.encode('محمد صلى الله عليه وسلم');
-final decoded = replacer.decode(encoded);
-```
-
-- Handle fallback if font is not registered:
-
-```dart
-const useFallback = true;
-final textWidget = IslamicText(
-  text: 'محمد صلى الله عليه وسلم',
-  islamicVerticalOffset: 0.0,
-  enableFallback: useFallback,
-);
-```
-
----
-
-## Example App
-
-Check the `/example` folder for a working Flutter application that demonstrates:
-
-- Ligature replacement
-- Custom styling
-- Long multi-line text
-- Font fallback
-
-Run the example:
-
-```bash
-cd example
-flutter run
-```
 
 ---
 

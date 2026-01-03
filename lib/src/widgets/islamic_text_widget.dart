@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_text/src/utils/islamic_font_guard.dart';
+import 'package:islamic_text/src/utils/font_loader.dart';
 import 'package:islamic_text/src/utils/islamic_text_span_builder.dart';
 import 'package:islamic_text/src/style/islamic_text_style_resolver.dart';
 import 'package:islamic_text/src/ligature/ligature_replacer.dart';
@@ -60,8 +60,6 @@ class IslamicText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool fontAvailable = IslamicFontGuard.ensureRegistered(enableFallback);
-
     final replacer = LigatureReplacer();
     final encodedText = replacer.encode(text);
 
@@ -70,7 +68,6 @@ class IslamicText extends StatelessWidget {
       normalStyle: normalTextStyle,
       islamicStyle: islamicTextStyle,
       verticalOffset: islamicVerticalOffset,
-      enableFont: fontAvailable,
     );
 
     final spanBuilder = IslamicTextSpanBuilder(
@@ -81,13 +78,23 @@ class IslamicText extends StatelessWidget {
       verticalOffset: styleResolver.resolvedOffset,
     );
 
-    return Text.rich(
-      TextSpan(children: spanBuilder.build()),
-      textAlign: textAlign,
-      textDirection: textDirection ?? Directionality.of(context),
-      strutStyle: strutStyle,
-      maxLines: maxLines,
-      overflow: overflow,
+    return FutureBuilder(
+      future: IslamicFontLoader.load(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          // Show placeholder while font is loading
+          return Text('');
+        }
+        // Font loaded, build normally
+        return Text.rich(
+          TextSpan(children: spanBuilder.build()),
+          textAlign: textAlign,
+          textDirection: textDirection ?? Directionality.of(context),
+          strutStyle: strutStyle,
+          maxLines: maxLines,
+          overflow: overflow,
+        );
+      },
     );
   }
 }
