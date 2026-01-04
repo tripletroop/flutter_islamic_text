@@ -1,15 +1,26 @@
 import 'package:flutter/services.dart';
 
-class IslamicFontLoader {
+class IslamicTextFontLoader {
+  IslamicTextFontLoader._();
+
+  static final IslamicTextFontLoader instance = IslamicTextFontLoader._();
+
+  static const String family = 'IslamicPhrases';
   static bool _loaded = false;
 
-  /// Loads the IslamicPhrases font once at runtime
+  static bool get isLoaded => _loaded;
+
+  /// Must be called once at app startup
   static Future<void> load() async {
     if (_loaded) return;
-    final loader = FontLoader('IslamicPhrases');
-    loader.addFont(
-      rootBundle.load('packages/islamic_text/lib/fonts/islamic_phrases.ttf'),
+
+    final ByteData data = await rootBundle.load(
+      'packages/islamic_text/lib/fonts/islamic_phrases.ttf',
     );
+
+    final loader = FontLoader(family);
+    loader.addFont(Future.value(data));
+
     await loader.load();
     _loaded = true;
   }

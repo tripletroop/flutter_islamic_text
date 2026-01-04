@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:islamic_text/islamic_text.dart';
+import 'package:islamic_text/src/ligature/ligature_replacer.dart';
 
 void main() {
   group('LigatureReplacer', () {

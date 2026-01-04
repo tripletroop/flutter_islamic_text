@@ -1,23 +1,26 @@
 import 'package:flutter/widgets.dart';
+import 'package:islamic_text/src/ligature/ligature_replacer.dart';
 
 /// Converts encoded text into styled [InlineSpan]s.
 class IslamicTextSpanBuilder {
   IslamicTextSpanBuilder({
-    required this.encodedText,
-    required this.ligatureSymbols,
+    required this.text,
     required this.normalStyle,
     required this.islamicStyle,
     required this.verticalOffset,
   });
 
-  final String encodedText;
-  final List<String> ligatureSymbols;
+  final String text;
   final TextStyle normalStyle;
   final TextStyle islamicStyle;
   final double verticalOffset;
+  final replacer = LigatureReplacer();
 
   List<InlineSpan> build() {
-    final pattern = RegExp('(${ligatureSymbols.map(RegExp.escape).join('|')})');
+    var encodedText = replacer.encode(text);
+    final pattern = RegExp(
+      '(${replacer.symbols.map(RegExp.escape).join('|')})',
+    );
     final spans = <InlineSpan>[];
     var currentIndex = 0;
 
@@ -41,7 +44,7 @@ class IslamicTextSpanBuilder {
   }
 
   InlineSpan _buildSpan(String segment) {
-    if (ligatureSymbols.contains(segment)) {
+    if (replacer.symbols.contains(segment)) {
       return WidgetSpan(
         alignment: PlaceholderAlignment.baseline,
         baseline: TextBaseline.alphabetic,

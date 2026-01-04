@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islamic_text/src/utils/font_loader.dart';
 
 /// Resolves effective text styles and font metrics
 /// for Islamic ligatures and normal text.
@@ -23,13 +24,18 @@ class IslamicTextStyleResolver {
   /// Vertical offset requested by the user.
   final double verticalOffset;
 
-  double get resolvedOffset => (verticalOffset + 0.15) * islamicStyle.fontSize!;
+  double get resolvedOffset => IslamicTextFontLoader.isLoaded
+      ? (verticalOffset + 0.15) * islamicStyle.fontSize!
+      : 0.0;
 
   static TextStyle _resolveIslamicStyle({
     required TextStyle base,
     TextStyle? override,
   }) {
     final baseFontSize = base.fontSize ?? 14.0;
+    if (!IslamicTextFontLoader.isLoaded) {
+      return base.merge(override);
+    }
     return base
         .merge(override)
         .copyWith(

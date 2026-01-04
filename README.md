@@ -37,13 +37,25 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  islamic_text: ^1.0.0
+  islamic_text: ^1.0.2
 ```
 
 Then run:
 
 ```bash
 flutter pub get
+```
+
+Add the islamic font loaded to your app entry point
+
+```dart
+import 'package:islamic_text/islamic_text.dart';
+
+void main() async {
+  ...
+  await IslamicTextFontLoader.load();
+  runApp(...);
+}
 ```
 
 ---

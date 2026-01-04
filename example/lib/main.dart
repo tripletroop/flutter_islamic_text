@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_text/islamic_text.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await IslamicTextFontLoader.load();
   runApp(const IslamicTextExampleApp());
 }
 

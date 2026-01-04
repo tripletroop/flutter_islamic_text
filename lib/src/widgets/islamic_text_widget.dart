@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_text/src/utils/font_loader.dart';
+import 'package:islamic_text/src/utils/font_guard.dart';
 import 'package:islamic_text/src/utils/islamic_text_span_builder.dart';
 import 'package:islamic_text/src/style/islamic_text_style_resolver.dart';
-import 'package:islamic_text/src/ligature/ligature_replacer.dart';
 
 /// A Flutter text widget that replaces Islamic phrases
 /// (e.g. "صلى الله عليه وسلم") with compact ligatures (e.g. ﷺ)
@@ -32,7 +31,6 @@ class IslamicText extends StatelessWidget {
     this.strutStyle,
     this.maxLines,
     this.overflow,
-    this.enableFallback = true,
     this.islamicVerticalOffset = 0.0,
   });
 
@@ -49,9 +47,6 @@ class IslamicText extends StatelessWidget {
   /// Useful for font baseline tuning.
   final double islamicVerticalOffset;
 
-  /// Whether to gracefully fall back if the font is missing.
-  final bool enableFallback;
-
   final TextAlign? textAlign;
   final TextDirection? textDirection;
   final StrutStyle? strutStyle;
@@ -60,8 +55,7 @@ class IslamicText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final replacer = LigatureReplacer();
-    final encodedText = replacer.encode(text);
+    IslamicTextFontGuard.assertLoaded();
 
     final styleResolver = IslamicTextStyleResolver(
       context: context,
@@ -71,30 +65,18 @@ class IslamicText extends StatelessWidget {
     );
 
     final spanBuilder = IslamicTextSpanBuilder(
-      encodedText: encodedText,
-      ligatureSymbols: replacer.symbols,
+      text: text,
       normalStyle: styleResolver.normalStyle,
       islamicStyle: styleResolver.islamicStyle,
       verticalOffset: styleResolver.resolvedOffset,
     );
-
-    return FutureBuilder(
-      future: IslamicFontLoader.load(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          // Show placeholder while font is loading
-          return Text('');
-        }
-        // Font loaded, build normally
-        return Text.rich(
-          TextSpan(children: spanBuilder.build()),
-          textAlign: textAlign,
-          textDirection: textDirection ?? Directionality.of(context),
-          strutStyle: strutStyle,
-          maxLines: maxLines,
-          overflow: overflow,
-        );
-      },
+    return Text.rich(
+      TextSpan(children: spanBuilder.build()),
+      textAlign: textAlign,
+      textDirection: textDirection ?? Directionality.of(context),
+      strutStyle: strutStyle,
+      maxLines: maxLines,
+      overflow: overflow,
     );
   }
 }
