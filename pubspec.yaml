@@ -1,6 +1,6 @@
 name: islamic_text
 description: A Flutter package for processing Islamic text, including ligature replacement and glyph rendering.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/tripletroop/flutter_islamic_text
 repository: https://github.com/tripletroop/flutter_islamic_text
 

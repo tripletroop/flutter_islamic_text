@@ -5,7 +5,13 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
-## [1.0.2] - 2026-01-04
+## 1.0.3
+
+### Added
+- Added all the optional Text.rich attributes to the widget for improved customization.
+
+
+## 1.0.2
 
 ### Changed
 - The `FontLoader` now runs at the main() function before runApp to avoid using FutureBuilder everytime the font is needed
@@ -14,7 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added `FontGuard` class to assert if the `FontLoader` not loaded
 
 
-## [1.0.1] - 2026-01-03
+## 1.0.1
 
 ### Added
 - Runtime font loading using `FontLoader` for the `IslamicPhrases` font.
@@ -27,7 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improved cross-platform reliability for the `IslamicText` widget.
 
 
-## 1.0.0 – 2026-01-02
+## 1.0.0
 
 ### Added
 - Initial release of `islamic_text` package.

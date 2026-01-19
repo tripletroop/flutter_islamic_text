@@ -32,6 +32,14 @@ class IslamicText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.islamicVerticalOffset = 0.0,
+    this.softWrap,
+    this.textScaler,
+    this.locale,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+    this.selectionColor,
+    this.semanticsLabel,
+    this.semanticsIdentifier,
   });
 
   /// Original text containing Islamic phrases.
@@ -52,6 +60,14 @@ class IslamicText extends StatelessWidget {
   final StrutStyle? strutStyle;
   final int? maxLines;
   final TextOverflow? overflow;
+  final bool? softWrap;
+  final TextScaler? textScaler;
+  final Locale? locale;
+  final TextWidthBasis? textWidthBasis;
+  final TextHeightBehavior? textHeightBehavior;
+  final Color? selectionColor;
+  final String? semanticsLabel;
+  final String? semanticsIdentifier;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +93,14 @@ class IslamicText extends StatelessWidget {
       strutStyle: strutStyle,
       maxLines: maxLines,
       overflow: overflow,
+      softWrap: softWrap,
+      textScaler: textScaler,
+      locale: locale,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+      selectionColor: selectionColor,
+      semanticsLabel: semanticsLabel,
+      semanticsIdentifier: semanticsIdentifier,
     );
   }
 }
