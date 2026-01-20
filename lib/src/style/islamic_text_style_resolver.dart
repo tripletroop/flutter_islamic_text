@@ -8,7 +8,6 @@ class IslamicTextStyleResolver {
     required BuildContext context,
     TextStyle? normalStyle,
     TextStyle? islamicStyle,
-    required this.verticalOffset,
   }) : normalStyle = normalStyle ?? DefaultTextStyle.of(context).style,
        islamicStyle = _resolveIslamicStyle(
          base: normalStyle ?? DefaultTextStyle.of(context).style,
@@ -21,26 +20,18 @@ class IslamicTextStyleResolver {
   /// Style for Islamic ligatures or glyphs.
   final TextStyle islamicStyle;
 
-  /// Vertical offset requested by the user.
-  final double verticalOffset;
-
-  double get resolvedOffset => IslamicTextFontLoader.isLoaded
-      ? (verticalOffset + 0.15) * islamicStyle.fontSize!
-      : 0.0;
-
   static TextStyle _resolveIslamicStyle({
     required TextStyle base,
     TextStyle? override,
   }) {
-    final baseFontSize = base.fontSize ?? 14.0;
+    final merged = base.merge(override);
     if (!IslamicTextFontLoader.isLoaded) {
-      return base.merge(override);
+      return merged;
     }
-    return base
-        .merge(override)
-        .copyWith(
-          fontFamily: 'IslamicPhrases',
-          fontSize: override?.fontSize ?? baseFontSize * 1.25,
-        );
+    final baseFontSize = base.fontSize ?? 14.0;
+    return merged.copyWith(
+      fontFamily: 'IslamicPhrases',
+      fontSize: override?.fontSize ?? baseFontSize * 1.25,
+    );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_text/src/utils/font_guard.dart';
 import 'package:islamic_text/src/utils/islamic_text_span_builder.dart';
-import 'package:islamic_text/src/style/islamic_text_style_resolver.dart';
 
 /// A Flutter text widget that replaces Islamic phrases
 /// (e.g. "صلى الله عليه وسلم") with compact ligatures (e.g. ﷺ)
@@ -9,14 +7,14 @@ import 'package:islamic_text/src/style/islamic_text_style_resolver.dart';
 ///
 ///
 /// ⚠️ Required setup:
-/// The `IslamicPhrases` font must be declared in the host app:
+/// ```dart
+/// import 'package:islamic_text/islamic_text.dart';
 ///
-/// ```yaml
-/// flutter:
-///   fonts:
-///     - family: IslamicPhrases
-///       fonts:
-///         - asset: packages/islamic_text/fonts/islamic_phrases.ttf
+/// void main() async {
+///   ...
+///   await IslamicTextFontLoader.load();
+///   runApp(...);
+/// }
 /// ```
 @immutable
 class IslamicText extends StatelessWidget {
@@ -31,7 +29,6 @@ class IslamicText extends StatelessWidget {
     this.strutStyle,
     this.maxLines,
     this.overflow,
-    this.islamicVerticalOffset = 0.0,
     this.softWrap,
     this.textScaler,
     this.locale,
@@ -51,10 +48,6 @@ class IslamicText extends StatelessWidget {
   /// Optional overrides for Islamic ligature text.
   final TextStyle? islamicTextStyle;
 
-  /// Vertical adjustment for Islamic ligatures.
-  /// Useful for font baseline tuning.
-  final double islamicVerticalOffset;
-
   final TextAlign? textAlign;
   final TextDirection? textDirection;
   final StrutStyle? strutStyle;
@@ -71,23 +64,12 @@ class IslamicText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IslamicTextFontGuard.assertLoaded();
-
-    final styleResolver = IslamicTextStyleResolver(
-      context: context,
-      normalStyle: normalTextStyle,
-      islamicStyle: islamicTextStyle,
-      verticalOffset: islamicVerticalOffset,
-    );
-
-    final spanBuilder = IslamicTextSpanBuilder(
-      text: text,
-      normalStyle: styleResolver.normalStyle,
-      islamicStyle: styleResolver.islamicStyle,
-      verticalOffset: styleResolver.resolvedOffset,
-    );
     return Text.rich(
-      TextSpan(children: spanBuilder.build()),
+      IslamicTextSpanBuilder(
+        text: text,
+        unresolvedNormalStyle: normalTextStyle,
+        unresolvedIslamicStyle: islamicTextStyle,
+      ).build(context),
       textAlign: textAlign,
       textDirection: textDirection ?? Directionality.of(context),
       strutStyle: strutStyle,

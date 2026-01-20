@@ -12,22 +12,22 @@ class LigatureReplacer {
   ///
   /// Symbols are intentionally chosen from a non-used Unicodes that preset in the font file
   /// block to avoid collisions with real text.
-  static const Map<String, String> _symbolToPhrase = {
-    '丁': 'جل جلاله',
-    '丂': 'عز وجل',
-    '丅': 'رضي الله عنهما',
-    '丆': 'رضي الله عنهم',
-    '丄': 'رضي الله عنها',
-    '七': 'رضي الله عنه',
-    '万': 'سبحانه وتعالى',
-    '丈': 'عليه السلام',
-    '三': 'صلى الله عليه وسلم',
+  static const Map<String, String> _puaMap = {
+    '\uE001': 'جل جلاله',
+    '\uE002': 'عز وجل',
+    '\uE003': 'رضي الله عنهما',
+    '\uE004': 'رضي الله عنهم',
+    '\uE005': 'رضي الله عنها',
+    '\uE006': 'رضي الله عنه',
+    '\uE007': 'سبحانه وتعالى',
+    '\uE008': 'عليه السلام',
+    '\uE009': 'صلى الله عليه وسلم',
   };
 
   /// Replaces phrases with internal placeholder symbols.
   String encode(String input) {
     var output = input;
-    for (final entry in _symbolToPhrase.entries) {
+    for (final entry in _puaMap.entries) {
       output = output.replaceAll(entry.value, entry.key);
     }
     return output;
@@ -38,12 +38,12 @@ class LigatureReplacer {
   /// Intended mainly for debugging or serialization.
   String decode(String input) {
     var output = input;
-    for (final entry in _symbolToPhrase.entries) {
+    for (final entry in _puaMap.entries) {
       output = output.replaceAll(entry.key, entry.value);
     }
     return output;
   }
 
   /// Returns all placeholder symbols used internally.
-  List<String> get symbols => _symbolToPhrase.keys.toList(growable: false);
+  List<String> get symbols => _puaMap.keys.toList(growable: false);
 }

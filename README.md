@@ -8,7 +8,6 @@ This package replaces common phrases like "صلى الله عليه وسلم" wi
 
 - Replace Islamic phrases with compact ligatures
 - Render ligatures using a custom font
-- Configurable vertical offset for perfect alignment
 - Support for multi-line text and text styling
 - Safe fallback if the font is missing (Web or misconfigured apps)
 - Future-ready: can extend to glyph rendering and complex shaping
@@ -79,7 +78,6 @@ class MyHomePage extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: IslamicText(
           text: 'محمد صلى الله عليه وسلم',
-          islamicVerticalOffset: -0.05,
         ),
       ),
     );
@@ -94,12 +92,9 @@ IslamicText(
   text: 'محمد صلى الله عليه وسلم',
   normalTextStyle: TextStyle(fontSize: 18, color: Colors.black87),
   islamicTextStyle: TextStyle(fontSize: 20, color: Colors.green),
-  islamicVerticalOffset: 0.0,
   textAlign: TextAlign.center,
 )
 ```
-
-> The `islamicVerticalOffset` helps align the ligatures correctly with surrounding text.
 
 ---
 
