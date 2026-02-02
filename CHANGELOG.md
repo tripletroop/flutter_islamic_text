@@ -5,6 +5,14 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
+## 1.1.1
+
+### Changed
+- Broadened Dart SDK compatibility to `>=2.17.0 <4.0.0` to support more Flutter projects.
+- Updated development lint configuration.
+- No functional or API changes.
+
+
 ## 1.1.0
 
 ### Fixed
