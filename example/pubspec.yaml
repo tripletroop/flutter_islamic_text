@@ -12,6 +12,7 @@ dependencies:
   islamic_text:
     path: ..
 
+  material_ui: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

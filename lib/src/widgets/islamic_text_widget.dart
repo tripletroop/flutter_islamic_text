@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:islamic_text/src/utils/islamic_text_span_builder.dart';
 
 /// A Flutter text widget that replaces Islamic phrases

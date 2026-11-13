@@ -3,7 +3,6 @@
 A Flutter widget to render Islamic phrases with compact ligatures and custom font.  
 This package replaces common phrases like "صلى الله عليه وسلم" with symbols such as "ﷺ" and paints them in a dedicated font. It is designed to be **safe, performant, and extensible** for future glyph rendering.
 
-
 ## Features
 
 - Replace Islamic phrases with compact ligatures
@@ -13,11 +12,10 @@ This package replaces common phrases like "صلى الله عليه وسلم" wi
 - Future-ready: can extend to glyph rendering and complex shaping
 - Fully reversible text encoding/decoding for serialization or testing
 
-
 ## Preview
 
-| Without IslamicText | With IslamicText |
-|-------------------|-----------------|
+| Without IslamicText                        | With IslamicText                          |
+| ------------------------------------------ | ----------------------------------------- |
 | ![](assets/images/islamic_text_before.png) | ![](assets/images/islamic_text_after.png) |
 
 ---
@@ -45,7 +43,7 @@ Then run:
 flutter pub get
 ```
 
-Add the islamic font loaded to your app entry point
+Add the islamic font loader to your app entry point
 
 ```dart
 import 'package:islamic_text/islamic_text.dart';
@@ -100,7 +98,7 @@ IslamicText(
 
 ## Additional Information
 
-- **GitHub:** [https://github.com/tripletroop/flutter_islamic_text](https://github.com/tripletroop/flutter_islamic_text)  
+- **GitHub:** [https://github.com/tripletroop/flutter_islamic_text](https://github.com/tripletroop/flutter_islamic_text)
 - **Pub.dev:** [https://pub.dev/packages/islamic_text](https://pub.dev/packages/islamic_text)
 
 ### Contributing
@@ -112,8 +110,8 @@ IslamicText(
 
 ### Issues
 
-- File issues on GitHub  
-- Include Flutter/Dart version and error details  
+- File issues on GitHub
+- Include Flutter/Dart version and error details
 - Expect response within 1–3 business days
 
 ---

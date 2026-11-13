@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:islamic_text/src/utils/font_loader.dart';
 
 /// Resolves effective text styles and font metrics
